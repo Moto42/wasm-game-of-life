@@ -155,6 +155,35 @@ impl Universe {
         }
     }
 
+    pub fn new_lone_glider() -> Universe {
+        let height: u32 = 64;
+        let width: u32 = 64;
+
+        let mut cells: Vec<Cell> = (0..width*height)
+            .map(|_| Cell::Dead )
+            .collect();
+
+        let live_cells = [
+            // [row, col]
+            [1, 3],
+            [2, 3],
+            [3, 3],
+            [2, 1],
+            [3, 2],
+        ];
+
+        for [row, col] in live_cells {
+            cells[(row*width + col)as usize] = Cell::Alive;
+        }
+        
+        Universe {
+            height,
+            width,
+            cells,
+        }
+    }
+
+
     pub fn width(&self) -> u32 {
         self.width
     }
