@@ -72,6 +72,12 @@ impl Universe {
         }
         count
     }
+
+    /// Get the dead and alive valuse of the entire universe
+    pub fn get_cells(&self) ->&[Cell] {
+        &self.cells
+    }
+
 }
 
 #[wasm_bindgen]
@@ -190,7 +196,7 @@ impl Universe {
      /// Resets all cells to a dead state
     pub fn set_width(&mut self, width: u32) {
         self.width = width;
-        self.cells = self.cells = (0..width * self.height).map(|_i| Cell::Dead).collect();
+        self.cells = (0..width * self.height).map(|_i| Cell::Dead).collect();
     }
     pub fn height(&self) -> u32 {
         self.height
