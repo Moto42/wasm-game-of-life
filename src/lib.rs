@@ -78,6 +78,16 @@ impl Universe {
         &self.cells
     }
 
+    /// Set cells to be alive in a universe by passing the row and column
+     /// of each cell as an array.
+     /// cells : array of tuples (row, col)
+    pub fn set_cells(&mut self, cells: &[(u32, u32)]) {
+        for (row, col) in cells.iter().cloned() {
+            let idx = self.get_index(row, col);
+            self.cells[idx] = Cell::Alive;
+        }
+    }
+
 }
 
 #[wasm_bindgen]
