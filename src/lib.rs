@@ -1,7 +1,10 @@
 mod utils;
 
+extern crate js_sys;
+
 use wasm_bindgen::prelude::*;
 use std::fmt;
+
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -16,6 +19,16 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 pub enum Cell {
     Dead = 0,
     Alive = 1,
+}
+
+impl Cell {
+    pub fn rand() -> Cell {
+        if js_sys::Math::random() > 0.5 {
+            Cell::Alive
+        } else {
+            Cell::Dead
+        }
+    }
 }
 
 #[wasm_bindgen]
@@ -119,6 +132,21 @@ impl Universe {
         let height: u32 = 64;
 
         let cells = vec![Cell::Dead; (width as usize)*(height as usize)];
+
+        Universe {
+            height,
+            width,
+            cells,
+        }
+    }
+
+    pub fn new_rand() -> Universe {
+        let height: u32 = 64;
+        let width: u32 = 64;
+
+        let cells = (0..width*height)
+            .map(|_| Cell::rand() )
+            .collect();
 
         Universe {
             height,

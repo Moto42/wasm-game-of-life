@@ -9,7 +9,7 @@ const ALIVE_COLOR = "#000000";
 const pre = document.getElementById("game-of-life-canvas");
 
 // Construct the universe, and get its width and height.
-const universe = Universe.new_empty()
+const universe = Universe.new_rand()
 const width = universe.width();
 const height = universe.height();
 
