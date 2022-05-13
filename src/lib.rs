@@ -114,6 +114,19 @@ impl Universe {
         }
     }
 
+    pub fn new_empty() -> Universe {
+        let width: u32 = 64;
+        let height: u32 = 64;
+
+        let cells = vec![Cell::Dead; (width as usize)*(height as usize)];
+
+        Universe {
+            height,
+            width,
+            cells,
+        }
+    }
+
     pub fn width(&self) -> u32 {
         self.width
     }
