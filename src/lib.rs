@@ -26,7 +26,6 @@ pub struct Universe {
     cells: Vec<Cell>,
 }
 
-#[allow(dead_code)]
 // private functions used internaly
 impl Universe {
     ///return the flat-Vector index of a cell on the grid.
@@ -63,7 +62,6 @@ impl Universe {
 
 }
 
-#[allow(dead_code)]
 #[wasm_bindgen]
 /// Javascript facing functions.
 impl Universe {
