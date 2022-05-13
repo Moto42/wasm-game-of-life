@@ -56,7 +56,7 @@ impl Universe {
      /// 
      /// * `row` - the row number of the cell in question
      /// * `column` - the column number of the cell in question
-     fn live_neighbor_count(&self, row: u32, column: u32) -> u8 {
+    fn live_neighbor_count(&self, row: u32, column: u32) -> u8 {
         let mut count = 0;
         for delta_row in [self.height - 1, 0, 1].iter().cloned() {
             for delta_col in [self.width - 1, 0, 1].iter().cloned() {
@@ -72,7 +72,6 @@ impl Universe {
         }
         count
     }
-
 }
 
 #[wasm_bindgen]
@@ -187,8 +186,20 @@ impl Universe {
     pub fn width(&self) -> u32 {
         self.width
     }
+    /// Set the width of the universe
+     /// Resets all cells to a dead state
+    pub fn set_width(&mut self, width: u32) {
+        self.width = width;
+        self.cells = self.cells = (0..width * self.height).map(|_i| Cell::Dead).collect();
+    }
     pub fn height(&self) -> u32 {
         self.height
+    }
+    /// Set the height of the universe.
+     /// Resets all cells to the dead state.
+    pub fn set_height(&mut self, height: u32) {
+        self.height = height;
+        self.cells = (0..self.width * height).map(|_i| Cell::Dead).collect();
     }
     
     pub fn cells(&self) -> *const Cell {
