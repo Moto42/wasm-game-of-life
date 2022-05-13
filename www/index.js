@@ -1,7 +1,7 @@
 import { Universe, Cell } from "wasm-game-of-life";
 import { memory } from "wasm-game-of-life/wasm_game_of_life_bg";
 
-const CELL_SIZE = 10; //px
+const CELL_SIZE = 5; //px
 const GRID_COLOR = "#CCCCCC";
 const DEAD_COLOR = "#FFFFFF";
 const ALIVE_COLOR = "#000000";
@@ -51,8 +51,33 @@ const drawGrid = () => {
     ctx.stroke();
 }
 const drawCells = () => {
-    
+    const cellsPtr = universe.cells();
+    const cells = new Uint8Array(memory.buffer, cellsPtr, width * height);
+
+    ctx.beginPath();
+
+    for (let row = 0; row < height; row++) {
+        for (let col = 0; col < width; col++) {
+            const idx = getIndex(row, col);
+
+            ctx.fillStyle = cells[idx] == Cell.Dead ?
+                DEAD_COLOR :
+                ALIVE_COLOR;
+            
+            ctx.fillRect(
+                col * (CELL_SIZE + 1) + 1,
+                row * (CELL_SIZE + 1) + 1,
+                CELL_SIZE,
+                CELL_SIZE,
+            );
+        }
+    }
+    ctx.stroke();
 }
 
-
-requestAnimationFrame(renderLoop);
+// IIFE to get things running
+(function initialize_and_starte() {
+    drawGrid();
+    drawCells();
+    requestAnimationFrame(renderLoop);
+})()
