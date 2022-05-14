@@ -1,6 +1,7 @@
 mod utils;
 
 extern crate js_sys;
+extern crate web_sys;
 
 use wasm_bindgen::prelude::*;
 use std::fmt;
@@ -11,6 +12,13 @@ use std::fmt;
 #[cfg(feature = "wee_alloc")]
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+
+// a macro to provide `println!(...) style syntaxt for `console.log` logging.
+macro_rules! log {
+    ( $( $t:tt )* ) => {
+        web_sys::console::log_1(&format!( $($t )* ).into());
+    };
+}
 
 #[wasm_bindgen]
 #[repr(u8)]
