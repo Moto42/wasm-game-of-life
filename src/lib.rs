@@ -126,6 +126,7 @@ impl Universe {
     /// Creates a default 64/64 universe  
      /// with a pattern of live/dead cells.
     pub fn new() -> Universe {
+        utils::set_panic_hook();
         let width = 64;
         let height = 64;
 
@@ -143,6 +144,7 @@ impl Universe {
     }
 
     pub fn new_empty() -> Universe {
+        utils::set_panic_hook();
         let width: u32 = 64;
         let height: u32 = 64;
 
@@ -156,6 +158,7 @@ impl Universe {
     }
 
     pub fn new_rand() -> Universe {
+        utils::set_panic_hook();
         let height: u32 = 64;
         let width: u32 = 64;
 
@@ -171,6 +174,7 @@ impl Universe {
     }
 
     pub fn new_lone_glider() -> Universe {
+        utils::set_panic_hook();
         let height: u32 = 64;
         let width: u32 = 64;
 
