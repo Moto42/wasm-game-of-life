@@ -120,10 +120,23 @@ canvas.addEventListener("click", event => {
   
     drawGrid();
     drawCells();
-  });
-  
+});
 
-// IIFE to get things running
+// Clear the board
+document.getElementById("kill").addEventListener("click", event => {
+    universe.set_empty();
+    drawGrid();
+    drawCells();
+});
+
+// randomize the board
+document.getElementById("randomize").addEventListener("click", event => {
+    universe.set_rand();
+    drawGrid();
+    drawCells();
+});
+
+  // IIFE to get things running
 (function initialize_and_starte() {
     play();
 })()

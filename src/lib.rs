@@ -216,6 +216,18 @@ impl Universe {
         }
     }
 
+    pub fn set_rand(&mut self) {
+        let new_cells = (0..self.width * self.height)
+            .map(|_| Cell::rand() )
+            .collect();
+        self.cells = new_cells;
+    }
+    pub fn set_empty(&mut self) {
+        let new_cells = (0..self.width * self.height)
+            .map(|_| Cell::Dead)
+            .collect();
+        self.cells = new_cells;
+    }
 
     pub fn width(&self) -> u32 {
         self.width
